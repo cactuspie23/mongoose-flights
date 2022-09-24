@@ -56,10 +56,30 @@ function deleteFlight(req, res) {
   })
 }
 
+function edit(req, res) {
+  Flight.findById(req.params.id)
+  .then(flight => {
+    res.render('flights/edit', {
+      flight,
+      title: 'Edit Flight',
+    })
+  })
+  .catch(err => {
+    console.log(err)
+    res.redirect('/flights')
+  })
+}
+
+function update(req, res) {
+  
+}
+
 export {
   index,
   newFlight as new,
   create,
   show,
   deleteFlight as delete,
+  edit,
+  update,
 }
