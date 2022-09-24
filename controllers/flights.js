@@ -1,7 +1,8 @@
 import { Flight } from '../models/flight.js'
 
 function index(req, res) {
-  Flight.find({})
+  const sort = { departs: 1 }
+  Flight.find({}).sort(sort)
   .then(flights => {
     res.render('flights/index', {
       flights: flights,
@@ -10,7 +11,7 @@ function index(req, res) {
   })
   .catch(err => {
     console.log(err)
-    res.redirect('/flights')
+    res.redirect('/')
   })
 }
 
@@ -71,7 +72,14 @@ function edit(req, res) {
 }
 
 function update(req, res) {
-  
+  Flight.findByIdAndUpdate(req.params.id, req.body, {new: true})
+  .then(flight => {
+    res.redirect(`/flights/${flight._id}`)
+  })
+  .catch(err => {
+    console.log(err)
+    res.redirect('/flights')
+  })
 }
 
 export {
