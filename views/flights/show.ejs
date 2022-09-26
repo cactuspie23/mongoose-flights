@@ -37,7 +37,7 @@
         <% flight.tickets.forEach(function(ticket) { %>
           <tr>
             <td><form 
-              action="/flights/<%= flight._id %>/tickets?_method=DELETE"
+              action="/flights/<%= flight._id %>/tickets/<%= ticket._id %>?_method=DELETE"
               class="delete-form"
               method="post">
               <button type="submit">X</button>
